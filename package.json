@@ -4,26 +4,92 @@
   "repository": "https://github.com/felipebrgs",
   "license": "MIT",
   "displayName": "CodeToText",
-  "description": "transform folder archives in a single txt",
+  "description": "Transforma arquivos de pastas em um único txt",
   "icon": "vec.png",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "engines": {
     "vscode": "^1.96.0"
   },
   "categories": [
     "Other"
   ],
-  "activationEvents": [],
+  "activationEvents": [
+    "onView:fileTreeView",
+    "onCommand:extension.concatenateSelectedFiles",
+    "onCommand:extension.toggleSelection"
+  ],
   "main": "./dist/extension.js",
   "contributes": {
+    "colors": [
+      {
+        "id": "myExtension.buttonGreen",
+        "description": "Cor verde para o botão de concatenação",
+        "defaults": {
+          "dark": "#4CAF50",
+          "light": "#4CAF50",
+          "highContrast": "#4CAF50"
+        }
+      }
+    ],
     "commands": [
       {
-        "command": "extension.concatenateJsFiles",
-        "title": "Concatenate JS/TS Files",
+        "command": "extension.concatenateButton",
+        "title": "Concatenar Arquivos",
         "icon": {
-          "light": "./images/light/concatenateJsFiles.svg",
-          "dark": "./images/dark/concatenateJsFiles.svg"
+          "light": "$(check)",
+          "dark": "$(check)"
         }
+      },
+      {
+        "command": "extension.concatenateSelectedFiles",
+        "title": "Concatenar Arquivos",
+        "icon": "$(combine)"
+      },
+      {
+        "command": "extension.toggleSelection",
+        "title": "Alternar Seleção"
+      }
+    ],
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "codetotext-explorer",
+          "title": "CodeToText",
+          "icon": "vec.png"
+        }
+      ]
+    },
+    "views": {
+      "codetotext-explorer": [
+        {
+          "id": "fileTreeView",
+          "name": "Arquivos para Concatenar",
+          "when": "workspaceFolderCount != 0",
+          "icon": "vec.png"
+        }
+      ]
+    },
+    "menus": {
+      "view/title": [
+        {
+          "command": "extension.concatenateSelectedFiles",
+          "when": "view == fileTreeView",
+          "group": "navigation"
+        }
+      ],
+      "view/item/context": [
+        {
+          "command": "extension.toggleSelection",
+          "when": "view == fileTreeView",
+          "group": "inline"
+        }
+      ]
+    },
+    "keybindings": [
+      {
+        "command": "extension.concatenateSelectedFiles",
+        "key": "ctrl+shift+c",
+        "when": "view == fileTreeView"
       }
     ]
   },
