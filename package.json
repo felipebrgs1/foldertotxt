@@ -1,12 +1,12 @@
 {
   "name": "codetotext",
   "publisher": "CodeToText",
-  "repository": "https://github.com/felipebrgs",
+  "repository": "https://github.com/felipebrgs1",
   "license": "MIT",
   "displayName": "CodeToText",
   "description": "Transforma arquivos de pastas em um único txt",
   "icon": "vec.png",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "engines": {
     "vscode": "^1.96.0"
   },
